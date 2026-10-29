@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>О моём перерождении в слизь — Племя Темпест</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3c5 7 11 12 11 18a11 11 0 0 1-22 0C5 15 11 10 16 3z' fill='%2359c8ff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&family=Ruslan+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div id="bubbles" aria-hidden="true"></div>
+<div id="trail" aria-hidden="true"></div>
+
+<!-- Заставка: голос Великого мудреца -->
+<div id="boot" role="dialog" aria-label="Заставка">
+  <div class="boot-inner">
+    <p id="boot-text"></p>
+    <button id="boot-skip" type="button">Пропустить</button>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="stage">
+    <svg class="circle" viewBox="-100 -100 200 200" aria-hidden="true">
+      <g class="spin-a">
+        <circle r="96" fill="none" stroke="#8c7bff" stroke-width="1.2" stroke-dasharray="2 5"/>
+        <circle r="88" fill="none" stroke="#a8ecff" stroke-width="1.5"/>
+        <circle r="70" fill="none" stroke="#59c8ff" stroke-width="3" stroke-dasharray="1 7" stroke-linecap="round"/>
+      </g>
+      <g class="spin-b">
+        <polygon points="0,-80 69.3,40 -69.3,40" fill="none" stroke="#a8ecff" stroke-width="1.4"/>
+        <polygon points="0,80 69.3,-40 -69.3,-40" fill="none" stroke="#a8ecff" stroke-width="1.4"/>
+        <circle r="46" fill="none" stroke="#8c7bff" stroke-width="1.2" stroke-dasharray="10 4 2 4"/>
+      </g>
+    </svg>
+
+    <button class="slime-btn" id="slime" type="button" aria-label="Потрогать слизь">
+      <svg class="slime" viewBox="0 0 200 190" aria-hidden="true">
+        <defs>
+          <radialGradient id="body" cx="36%" cy="28%" r="85%">
+            <stop offset="0" stop-color="#d6f7ff"/>
+            <stop offset=".45" stop-color="#6fd2ff"/>
+            <stop offset="1" stop-color="#2a8fe0"/>
+          </radialGradient>
+        </defs>
+        <ellipse cx="100" cy="176" rx="76" ry="9" fill="#02102e" opacity=".45"/>
+        <path d="M100 14C122 14 134 40 152 70C174 104 190 130 184 154C178 176 150 178 100 178C50 178 22 176 16 154C10 130 26 104 48 70C66 40 78 14 100 14Z" fill="url(#body)" stroke="#bff3ff" stroke-width="2"/>
+        <ellipse cx="66" cy="62" rx="20" ry="9" transform="rotate(-38 66 62)" fill="#fff" opacity=".65"/>
+        <circle cx="150" cy="140" r="5" fill="#fff" opacity=".35"/>
+        <circle cx="38" cy="140" r="4" fill="#fff" opacity=".3"/>
+        <g class="eyes">
+          <g id="pupils">
+            <ellipse cx="74" cy="110" rx="10" ry="13" fill="#07204f"/>
+            <ellipse cx="126" cy="110" rx="10" ry="13" fill="#07204f"/>
+            <circle cx="71" cy="105" r="3.6" fill="#fff"/>
+            <circle cx="123" cy="105" r="3.6" fill="#fff"/>
+          </g>
+        </g>
+        <path d="M88 138Q100 151 112 138" fill="none" stroke="#07204f" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <p class="slime-say" id="slime-say" role="status"></p>
+  </div>
+
+  <div class="intro">
+    <p class="jp" lang="ja">転生したらスライムだった件</p>
+    <h1 id="title">О моём перерождении в слизь</h1>
+
+    <section class="sage" aria-live="polite">
+      <h2 class="sage-head">Справка Великого мудреца</h2>
+      <dl id="facts"></dl>
+      <p id="synopsis"></p>
+    </section>
+  </div>
+</header>
+
+<nav class="menu" aria-label="Разделы">
+  <a href="#seasons">Серии</a>
+  <a href="#cast">Персонажи</a>
+  <a href="#sources">Плагины</a>
+</nav>
+
+<main>
+  <section id="seasons">
+    <h2>Серии</h2>
+    <div class="tabs" id="tabs"></div>
+    <div class="absorbed">
+      <p id="seen-text"></p>
+      <div class="bar" aria-hidden="true"><span id="seen-bar"></span></div>
+    </div>
+    <ol class="episodes" id="episodes"></ol>
+  </section>
+
+  <section id="cast">
+    <h2>Племя Темпест</h2>
+    <ul class="cast" id="castlist"><li class="loading">Хищник ищет жителей…</li></ul>
+  </section>
+
+  <section id="sources">
+    <h2>Плагины просмотра</h2>
+    <p class="lead">Нажми на серию — Великий мудрец предложит источники. Каждый плагин — отдельный файл в папке <code>www/plugins</code>. Положил новый файл, перезагрузил страницу — он в списке.</p>
+    <ul class="plugin-list" id="pluginlist"></ul>
+  </section>
+</main>
+
+<footer>
+  <p>Фан-сайт. Аниме создано Studio 8-Bit, права принадлежат правообладателям.<br>
+  Данные: Shikimori и Jikan (MyAnimeList). Серии на сторонних сайтах смотрятся на условиях этих сайтов.</p>
+</footer>
+
+<dialog id="portal" aria-labelledby="portal-title">
+  <div class="portal-card">
+    <button class="close" id="portal-close" type="button" aria-label="Закрыть">×</button>
+    <h3 id="portal-title"></h3>
+    <p class="portal-sub" id="portal-sub"></p>
+    <ul class="plugins" id="portal-plugins"></ul>
+    <div class="player" id="player" hidden></div>
+  </div>
+</dialog>
+
+<script src="/player.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

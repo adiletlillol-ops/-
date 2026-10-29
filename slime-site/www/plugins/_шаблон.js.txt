@@ -1,0 +1,24 @@
+// Скопируй этот файл, переименуй в что-нибудь.js (расширение именно .js) и положи в папку plugins.
+// Перезагрузи страницу — плагин появится в окне серии.
+// Плагины НЕ переводят на другие сайты: они отдают видео, а играет его плеер этого сайта.
+//
+// ctx: animeId, season, seasonLabel, episode, episodeTitle, titleRu, titleEn, titleRomaji
+// window.SlimeApi.get('буква', '/путь') — получить JSON со стороннего сайта через твой start.ps1.
+//   Букву и настоящий адрес источника задай в $Upstreams в начале start.ps1.
+//
+// resolve может вернуть (или бросить Error('текст ошибки')):
+//   { kind: 'video', label: 'Название источника', urls: [{ label: '1080p', url: 'https://.../1.m3u8' }] }
+//        — видео .mp4 / .webm / .m3u8 играет встроенный плеер (можно несколько качеств)
+//   { kind: 'embed', url: 'https://...' }  — страница плеера во фрейме (если сайт это разрешает)
+//   { kind: 'player' }                    — открыть «Мой плеер» (папка, файл, ссылка)
+//   { kind: 'choose', title, options: [{ label, note, value }], pick: async (value) => результат }
+//        — показать список вариантов, а после выбора вызвать pick(value)
+(window.SlimePlugins = window.SlimePlugins || []).push({
+  id: 'moy-plagin',
+  name: 'Мой плагин',
+  mark: 'М',
+  note: 'Короткое описание под названием.',
+  async resolve(ctx) {
+    return { kind: 'video', label: 'Мой источник', urls: [{ label: 'HD', url: 'https://example.com/video.mp4' }] };
+  },
+});
